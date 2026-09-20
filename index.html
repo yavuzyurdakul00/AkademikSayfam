@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kişisel Blog & Akademik Portfolyo</title>
+  <style>
+    :root {
+      --bg-color: #0b0f17;
+      --card-bg: rgba(20, 27, 38, 0.8);
+      --border-color: rgba(255, 255, 255, 0.08);
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --accent-color: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --accent-hover: #0284c7;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* HEADER / NAVBAR */
+    header {
+      background: rgba(11, 15, 23, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .logo-title {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-btn.active {
+      color: var(--accent-color);
+      background: var(--accent-glow);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .page-section {
+      display: none;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* HERO / HOME SECTION */
+    .hero {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 3rem 2.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--accent-glow);
+      color: var(--accent-color);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .hero-desc {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 750px;
+      margin-bottom: 2rem;
+    }
+
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-3px);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--text-main);
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-color);
+      color: #0b0f17;
+      padding: 0.6rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--border-color);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    /* FORM STYLES */
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      background: rgba(11, 15, 23, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      outline: none;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--accent-color);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+      }
+      nav {
+        width: 100%;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <span class="logo-name">Adınız Soyadınız</span>
+      <span class="logo-title">Bilgisayar Programcılığı Öğrencisi</span>
+    </div>
+    <nav>
+      <button class="nav-btn active" onclick="showPage('home', this)">Ana Sayfa</button>
+      <button class="nav-btn" onclick="showPage('courses', this)">Dersler</button>
+      <button class="nav-btn" onclick="showPage('assignments', this)">Ödevler</button>
+      <button class="nav-btn" onclick="showPage('portfolio', this)">Portfolyo</button>
+      <button class="nav-btn" onclick="showPage('contact', this)">İletişim</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ANA SAYFA -->
+    <section id="home" class="page-section active">
+      <div class="hero">
+        <span class="hero-badge">Akademik Portfolyo & Blog</span>
+        <h1 class="hero-title">Yazılım Teknolojileri, Ders Notları ve Proje Çalışmaları</h1>
+        <p class="hero-desc">
+          Merhaba! Akademik sürecim boyunca geliştirdiğim yazılım projelerini, ders dokümanlarımı ve teknik birikimlerimi paylaştığım kişisel web alanıma hoş geldiniz.
+        </p>
+        <div style="display: flex; gap: 1rem;">
+          <button class="btn" onclick="showPage('portfolio', document.querySelectorAll('.nav-btn')[3])">Projelerimi İncele</button>
+          <button class="btn btn-secondary" onclick="showPage('contact', document.querySelectorAll('.nav-btn')[4])">İletişime Geç</button>
+        </div>
+      </div>
+
+      <h2 style="font-size: 1.4rem; margin-bottom: 1.25rem;">Son Güncellemeler</h2>
+      <div class="grid-cards">
+        <div class="card">
+          <h3 class="card-title">C# Nesne Yönelimli Programlama Notları</h3>
+          <p class="card-desc">Class, Inheritance ve Polymorphism konularını içeren ders özeti güncellendi.</p>
+          <button class="btn btn-secondary" onclick="showPage('courses', document.querySelectorAll('.nav-btn')[1])">Ders Notuna Git</button>
+        </div>
+        <div class="card">
+          <h3 class="card-title">3D Donanım Rehberi Projesi</h3>
+          <p class="card-desc">İnteraktif WebGL tabanlı donanım sergileme projesi portfolyoya eklendi.</p>
+          <button class="btn btn-secondary" onclick="showPage('portfolio', document.querySelectorAll('.nav-btn')[3])">Proine Bak</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- DERSLER -->
+    <section id="courses" class="page-section">
+      <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;">Ders Notları & Dokümanlar</h2>
+      <div class="grid-cards">
+        <div class="card">
+          <h3 class="card-title">Veri Tabanı Yönetim Sistemleri</h3>
+          <p class="card-desc">SQL sorguları, ilişkisel tablolar, JOIN yapıları ve normalizasyon konularını kapsayan çalışma kağıtları.</p>
+          <a href="#" class="btn">PDF İndir</a>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Web Geliştirme Teknolojileri</h3>
+          <p class="card-desc">HTML5, CSS3, JavaScript ve modern CSS kütüphaneleri üzerine ders içi uygulama kodları.</p>
+          <a href="#" class="btn">Kodları İncele</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ÖDEVLER -->
+    <section id="assignments" class="page-section">
+      <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;">Akademik Ödevler</h2>
+      <div class="grid-cards">
+        <div class="card">
+          <h3 class="card-title">Algoritma & Programlama Ödevi</h3>
+          <p class="card-desc">Matris işlemleri ve sıralama algoritmaları performans karşılaştırması raporu.</p>
+          <span style="color: var(--accent-color); font-size: 0.85rem; font-weight: 600;">Durum: Tamamlandı</span>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Sistem Analizi Ve Tasarımı</h3>
+          <p class="card-desc">UML Diyagramları, Kullanım Senaryoları (Use-Case) ve Varlık İletişim (ER) diyagram dosyaları.</p>
+          <span style="color: var(--accent-color); font-size: 0.85rem; font-weight: 600;">Durum: Teslim Edildi</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLYO -->
+    <section id="portfolio" class="page-section">
+      <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;">Yazılım Projeleri</h2>
+      <div class="grid-cards">
+        <div class="card">
+          <h3 class="card-title">3D Donanım Görselleştirme</h3>
+          <p class="card-desc">Bilgisayar donanım parçalarının 360 derece incelenebildiği web platformu projesi.</p>
+          <a href="#" class="btn">GitHub / Canlı Demo</a>
+        </div>
+        <div class="card">
+          <h3 class="card-title">Kişisel Blog & Portfolyo</h3>
+          <p class="card-desc">Single Page Application (SPA) mimarisine uygun olarak geliştirilen kişisel site.</p>
+          <a href="#" class="btn">İncele</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- İLETİŞİM -->
+    <section id="contact" class="page-section">
+      <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;">İletişim</h2>
+      <div class="card" style="max-width: 600px; margin: 0 auto;">
+        <form onsubmit="event.preventDefault(); alert('Mesajınız başarıyla iletildi!');">
+          <div class="form-group">
+            <label class="form-label">Adınız Soyadınız</label>
+            <input type="text" class="form-input" required placeholder="Örn: Ahmet Yılmaz">
+          </div>
+          <div class="form-group">
+            <label class="form-label">E-Posta Adresiniz</label>
+            <input type="email" class="form-input" required placeholder="ornek@email.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Mesajınız</label>
+            <textarea class="form-textarea" rows="4" required placeholder="Mesajınızı buraya yazabilirsiniz..."></textarea>
+          </div>
+          <button type="submit" class="btn" style="width: 100%; justify-content: center;">Gönder</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Adınız Soyadınız - Tüm Hakları Saklıdır.</p>
+  </footer>
+
+  <script>
+    function showPage(pageId, btnElement) {
+      // Sayfaları gizle/göster
+      document.querySelectorAll('.page-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(pageId).classList.add('active');
+
+      // Menü butonlarının aktifiğini güncelle
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      if (btnElement) {
+        btnElement.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>
