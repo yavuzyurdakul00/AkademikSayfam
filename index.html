@@ -357,31 +357,35 @@
         <div class="card">
           <h3 class="card-title">Kişisel Blog & Portfolyo</h3>
           <p class="card-desc">Single Page Application (SPA) mimarisine uygun olarak geliştirilen kişisel site.</p>
-          <a href="#" class="btn">İncele</a>
+          <a href="https://yavuzyurdakul00.github.io/donanim-bilesenleri/" class="btn">İncele</a>
         </div>
       </div>
     </section>
 
     <!-- İLETİŞİM -->
-    <section id="contact" class="page-section">
-      <h2 style="font-size: 1.75rem; margin-bottom: 1.5rem;">İletişim</h2>
-      <div class="card" style="max-width: 600px; margin: 0 auto;">
-        <form onsubmit="event.preventDefault(); alert('Mesajınız başarıyla iletildi!');">
-          <div class="form-group">
-            <label class="form-label">Adınız Soyadınız</label>
-            <input type="text" class="form-input" required placeholder="Örn: Ahmet Yılmaz">
-          </div>
-          <div class="form-group">
-            <label class="form-label">E-Posta Adresiniz</label>
-            <input type="email" class="form-input" required placeholder="ornek@email.com">
-          </div>
-          <div class="form-group">
-            <label class="form-label">Mesajınız</label>
-            <textarea class="form-textarea" rows="4" required placeholder="Mesajınızı buraya yazabilirsiniz..."></textarea>
-          </div>
-          <button type="submit" class="btn" style="width: 100%; justify-content: center;">Gönder</button>
-        </form>
-      </div>
+<div class="form-konteyner">
+    <h3>Bize Ulaşın & Dosya Gönderin</h3>
+    
+    <!-- action kısmına kendi formspree linkinizi yapıştırın -->
+    <!-- enctype="multipart/form-data" kısmı dosya yüklenebilmesi için ZORUNLUDUR -->
+    <form action="https://formspree.io" method="POST" enctype="multipart/form-data">
+        
+        <label for="isim">Adınız Soyadınız:</label>
+        <input type="text" id="isim" name="name" required placeholder="Adınızı giriniz...">
+
+        <label for="email">E-Posta Adresiniz:</label>
+        <input type="email" id="email" name="_replyto" required placeholder="E-postanızı giriniz...">
+
+        <label for="mesaj">Mesajınız:</label>
+        <textarea id="mesaj" name="message" rows="4" required placeholder="Mesajınızı buraya yazın..."></textarea>
+
+        <label for="dosya">Fotoğraf veya Video Yükleyin:</label>
+        <!-- accept özelliği ile sadece resim ve video seçilmesini sağlıyoruz -->
+        <input type="file" id="dosya" name="upload" accept="image/*, video/*" required>
+
+        <button type="submit" class="btn">Gönder</button>
+    </form>
+</div>
     </section>
   </main>
 
